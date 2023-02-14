@@ -76,6 +76,7 @@ contract PandaToken is ERC20, Ownable {
         }
 
         address giftFrom = ecrecover(msgHash, v, r, s);
+        require(giftFrom == owner() || giftFrom == address(0), "wrong signer");
         burnPending[giftFrom] += amount;
         require(amount == 1 ether, "amount error");
         require(
